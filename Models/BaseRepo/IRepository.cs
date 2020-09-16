@@ -16,6 +16,5 @@ namespace BcuV0._3.Models.BaseRepo
         public void Delete(T entity);
         public void DeleteRange(IEnumerable<T> entities);
         public IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
-
     }
 }

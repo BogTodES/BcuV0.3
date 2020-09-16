@@ -11,5 +11,6 @@ namespace BcuV0._3.Models.BlogsRepo
     {
         public Blogs GetMostLiked();
         public IEnumerable<Blogs> GetMostLikedN(int n);
+        public int GetLastInsertedId();
     }
 }

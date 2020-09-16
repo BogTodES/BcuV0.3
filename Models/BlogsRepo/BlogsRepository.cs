@@ -17,6 +17,12 @@ namespace BcuV0._3.Models.BlogsRepo
             this._entities = context;
         }
 
+        public int GetLastInsertedId()
+        {
+            return
+                this._entities.Blogs.OrderByDescending(b => b.Id).FirstOrDefault().Id;
+        }
+
         public Blogs GetMostLiked()
         {
             var q = this.schema().OrderBy(s => s.Value).FirstOrDefault();
@@ -76,3 +82,4 @@ namespace BcuV0._3.Models.BlogsRepo
         }
     }
 }
+ 

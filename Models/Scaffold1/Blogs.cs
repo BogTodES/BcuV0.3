@@ -10,7 +10,7 @@ namespace BcuV0._3.Models.Scaffold1
             BlogsSections = new HashSet<BlogsSections>();
         }
 
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
         public string UserId { get; set; }
         public string Title { get; set; }
 

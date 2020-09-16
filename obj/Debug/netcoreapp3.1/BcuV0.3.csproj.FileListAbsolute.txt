@@ -164,3 +164,12 @@ D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Areas\Ident
 D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\BcuV0.3.csproj.CoreCompileInputs.cache
+D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\BcuV0.3.MvcApplicationPartsAssemblyInfo.cs
+D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\BcuV0.3.MvcApplicationPartsAssemblyInfo.cache
+D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\Disable2fa.cshtml.g.cs
+D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml.g.cs
+D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml.g.cs
+D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml.g.cs
+D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Views\Blogs\BlogUnavailable.cshtml.g.cs
+D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Views\Blogs\Index.cshtml.g.cs

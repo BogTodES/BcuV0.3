@@ -47,7 +47,7 @@ namespace BcuV0._3.Models.Scaffold1
             {
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Title)
                     .IsRequired()
@@ -93,7 +93,7 @@ namespace BcuV0._3.Models.Scaffold1
 
                 entity.Property(e => e.CommentId)
                     .HasColumnName("CommentID")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Content).IsRequired();
 
@@ -115,7 +115,7 @@ namespace BcuV0._3.Models.Scaffold1
             {
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Title)
                     .IsRequired()
@@ -139,7 +139,7 @@ namespace BcuV0._3.Models.Scaffold1
             {
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Name)
                     .IsRequired()
