@@ -16,6 +16,22 @@ namespace BcuV0._3.Models.PostRepo
             this._context = context;
         }
 
+        public IEnumerable<Posts> AllPostsForSectionId(int Id)
+        {
+            var sectionPosts = _context.SectionsPosts;
+
+            var postIds = sectionPosts.Where(sp => sp.SectionId == Id)
+                                       .Select(sp => sp.PostId);
+
+            var postList = new List<Posts>();
+            foreach(var postId in postIds)
+            {
+                postList.Add(GetById(postId));
+            }
+
+            return postList;
+        }
+
         public int GetDislikes()
         {
             throw new NotImplementedException();

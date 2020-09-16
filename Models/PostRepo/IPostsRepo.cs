@@ -12,5 +12,6 @@ namespace BcuV0._3.Models.PostRepo
         public int GetLikes();
         public int GetDislikes();
         public int GetReactions();
+        public IEnumerable<Posts> AllPostsForSectionId(int Id);
     }
 }

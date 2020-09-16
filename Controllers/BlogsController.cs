@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BcuV0._3.Models.BaseUoW;
 using BcuV0._3.Models.Scaffold1;
+using BcuV0._3.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BcuV0._3.Controllers
@@ -25,14 +26,14 @@ namespace BcuV0._3.Controllers
             var userName = User.Identity.Name;
             if (userName is null)
             {
-                return View("BlogUnavailable", $"userName = {userName}");
+                return View("BlogUnavailable", "Username issue");
             }
 
             var user = _unit.Varuti.GetByName(userName);
             if(user is null)
             {   
 
-                return View("BlogUnavailable", $"user = {user.Id} {user.Nume}");
+                return View("BlogUnavailable", "Username issue");
             }
 
             var blogId = user.BlogId;
@@ -65,10 +66,40 @@ namespace BcuV0._3.Controllers
             
             if(selectedBlog is null)
             {
-                return View("BlogUnavailable", $"blogID = {blogId}");
+                return View("BlogUnavailable", "Could not find blog.");
             }
 
-            return View("ShowBlog", selectedBlog);
+            // return View("ShowBlog", new BlogWithUserInfo(selectedBlog, user));
+            return FillSections(selectedBlog, user);
+        }
+
+        public IActionResult FillSections(Blogs selectedBlog, Varuti user)
+        {
+            // construiesc progresiv view-ul
+            // adaug sectiunile
+
+            var sectionList =
+                _unit.Sections.SectionsForBlogId(selectedBlog.Id);
+
+            if(sectionList is null)
+            {
+                return View("BlogUnavailable", "Error on loading sections");
+            }
+
+            FillPosts(sectionList);
+            return View("ShowBlogPage", new BlogUserSections(selectedBlog, user, sectionList));
+        }
+
+        private IActionResult FillPosts(IEnumerable<Sections> sectionList)
+        {
+            // adaug postarile
+
+            /*foreach(var section in sectionList)
+            {
+                return View();
+            }*/
+
+            return View("BlogUnavailable", "postari");
         }
     }
 }

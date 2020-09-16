@@ -1,6 +1,8 @@
 ﻿using BcuV0._3.Models.BaseRepo;
 using BcuV0._3.Models.Scaffold1;
+using Microsoft.EntityFrameworkCore.Internal;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BcuV0._3.Models.SectionRepo
 {
@@ -13,14 +15,20 @@ namespace BcuV0._3.Models.SectionRepo
             this._context = context;
         }
 
-        public IEnumerable<Posts> GetMostLikedNPosts()
+        public IEnumerable<Sections> SectionsForBlogId(int Id)
         {
-            throw new System.NotImplementedException();
-        }
+            var blogSections = _context.BlogsSections;
 
-        public Posts GetMostLikedPost()
-        {
-            throw new System.NotImplementedException();
+            var sectIds = blogSections.Where(bs => bs.BlogId == Id)
+                                       .Select(bs => bs.SectionId);
+
+            var sections = new List<Sections>();
+            foreach(var id in sectIds)
+            {
+                sections.Add(GetById(id));
+            }
+
+            return sections;
         }
     }
 }

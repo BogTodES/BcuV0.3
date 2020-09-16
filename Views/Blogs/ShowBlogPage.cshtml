@@ -1,0 +1,30 @@
+﻿@{ 
+    ViewData["Title"] = Model.Title;
+}
+
+@model BcuV0._3.ViewModels.BlogUserSections
+
+<div>
+    <div>
+        <header class="display-4 text-center">
+            @Model.Title
+        </header>
+        <p class="text-center">
+            de @Model.Username
+        </p>
+    </div>
+    <div class="container">
+        <div class="row">
+            @foreach (var sect in Model.Sections)
+            {
+                <div class="col-md-3 card">
+                    <h3 class="text-center">
+                        @sect.Name
+                    </h3>    
+                </div>
+                // tre sa vezi cum scoti postarile din bd si sa le pui aici
+            }
+        </div>
+    </div>
+
+</div>

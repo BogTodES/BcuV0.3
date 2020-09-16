@@ -6,7 +6,6 @@ namespace BcuV0._3.Models.SectionRepo
 {
     public interface ISectionsRepo : IRepository<Sections>
     {
-        public Posts GetMostLikedPost();
-        public IEnumerable<Posts> GetMostLikedNPosts();
+        public IEnumerable<Sections> SectionsForBlogId(int Id);
     }
 }
