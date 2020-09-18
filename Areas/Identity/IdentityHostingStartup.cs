@@ -1,5 +1,5 @@
 ﻿using System;
-using BcuV0._3.Models.Scaffold1;
+using BcuV0._3.Models.Scaffold2;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;

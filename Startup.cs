@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BcuV0._3.Models.BaseUoW;
-using BcuV0._3.Models.Scaffold1;
+using BcuV0._3.Models.Scaffold2;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,7 +30,7 @@ namespace BcuV0._3
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddDbContext<Var_2Context>(options =>
-                options.UseSqlServer("Data Source=BTODERICA;Initial Catalog=Var_2;Integrated Security=True"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultString")));
 
             services.AddMvc();
         }
@@ -59,14 +59,18 @@ namespace BcuV0._3
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "loadBlog",
+                    name: "blog current user",
                     pattern: "blogs/index");
 
-                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "blog of user",
+                    pattern: "blogs/blogof/{Name}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}");
+
+                endpoints.MapRazorPages();
             });
         }
     }

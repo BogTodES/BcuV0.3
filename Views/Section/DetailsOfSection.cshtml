@@ -1,0 +1,22 @@
+﻿@model BcuV0._3.ViewModels.SectionWithPosts
+
+<div class="container justify-content-center">
+    <div class="text-capitalize text-center">
+        @Model.Name
+    </div>
+    <div class="card container">
+        <div class="container d-flex flex-column">
+            @foreach(var post in Model.Posts)
+            {
+                <div class="card">
+                    <h3>
+                        @post.Title -- @post.Id
+                    </h3>
+                    <h2>
+                        @post.Content
+                    </h2>
+                </div>
+            }
+        </div>
+    </div>
+</div>

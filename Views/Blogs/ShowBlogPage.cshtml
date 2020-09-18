@@ -1,30 +1,49 @@
 ﻿@{ 
-    ViewData["Title"] = Model.Title;
+    ViewData["Title"] = Model.MainInfo.Title;
 }
 
-@model BcuV0._3.ViewModels.BlogUserSections
+@model BcuV0._3.ViewModels.BUSPosts
 
 <div>
     <div>
         <header class="display-4 text-center">
-            @Model.Title
+            @Model.MainInfo.Title
         </header>
         <p class="text-center">
-            de @Model.Username
+            de @Model.MainInfo.Username.Trim()
         </p>
     </div>
     <div class="container">
         <div class="row">
-            @foreach (var sect in Model.Sections)
-            {
-                <div class="col-md-3 card">
+            <p>nr sectiuni = @Model.MainInfo.Sections.Count()</p>
+            @foreach (var sect in Model.MainInfo.Sections)
+            {   
+                <div class="col-md-3 card pre-scrollable">
                     <h3 class="text-center">
-                        @sect.Name
-                    </h3>    
+                        @sect.Name.Trim()
+                    </h3>
+                    <div class="container d-flex flex-column">
+                        @foreach (var post in Model.PostsMap[sect.Id])
+                        {
+                            <div class="card">
+                                <a class="text-dark" href="">
+                                    @post.Title.Trim()
+                                </a>
+                                <p class="text-secondary">
+                                    @post.Content
+                                </p>
+                            </div>
+                        }
+                        <form action="/" method="post"></form>
+                    </div>
                 </div>
-                // tre sa vezi cum scoti postarile din bd si sa le pui aici
+            }
+            @if (User.Identity.Name == Model.MainInfo.Username.Trim())
+            {
+                <form asp-controller="Section" asp-action="CreateNew">
+                    <input type="submit" class="btn btn-secondary" value="New Section"/>
+                </form>
             }
         </div>
     </div>
-
 </div>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BcuV0._3.Models.Scaffold1
+namespace BcuV0._3.Models.Scaffold2
 {
     public partial class ReactTypes
     {

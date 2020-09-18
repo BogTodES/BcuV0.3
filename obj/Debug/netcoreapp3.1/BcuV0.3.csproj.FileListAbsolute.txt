@@ -174,4 +174,4 @@ D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Areas\Ident
 D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Views\Blogs\BlogUnavailable.cshtml.g.cs
 D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Views\Blogs\Index.cshtml.g.cs
 D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Views\Blogs\ShowBlogPage.cshtml.g.cs
-D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Views\Blogs\_LoadPostsForId.cshtml.g.cs
+D:\miscVisStudProjects\BcuV0.3\BcuV0.3\obj\Debug\netcoreapp3.1\Razor\Views\Section\DetailsOfSection.cshtml.g.cs

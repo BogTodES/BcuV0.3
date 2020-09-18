@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using BcuV0._3.Models.BaseUoW;
-using BcuV0._3.Models.Scaffold1;
+using BcuV0._3.Models.Scaffold2;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

@@ -1,4 +1,4 @@
-﻿using BcuV0._3.Models.Scaffold1;
+﻿using BcuV0._3.Models.Scaffold2;
 using System;
 using System.Collections.Generic;
 using System.Linq;

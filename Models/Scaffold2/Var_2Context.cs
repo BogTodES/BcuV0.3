@@ -1,12 +1,10 @@
 ﻿using System;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace BcuV0._3.Models.Scaffold1
+namespace BcuV0._3.Models.Scaffold2
 {
-    public partial class Var_2Context : IdentityDbContext
+    public partial class Var_2Context : DbContext
     {
         public Var_2Context()
         {
@@ -22,42 +20,38 @@ namespace BcuV0._3.Models.Scaffold1
         public virtual DbSet<Comments> Comments { get; set; }
         public virtual DbSet<Posts> Posts { get; set; }
         public virtual DbSet<ReactTypes> ReactTypes { get; set; }
+        public virtual DbSet<RoleClaims> RoleClaims { get; set; }
+        public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Sections> Sections { get; set; }
         public virtual DbSet<SectionsPosts> SectionsPosts { get; set; }
+        public virtual DbSet<UserClaims> UserClaims { get; set; }
         public virtual DbSet<UserCommentReacts> UserCommentReacts { get; set; }
+        public virtual DbSet<UserLogins> UserLogins { get; set; }
         public virtual DbSet<UserPostReacts> UserPostReacts { get; set; }
+        public virtual DbSet<UserRoles> UserRoles { get; set; }
+        public virtual DbSet<UserTokens> UserTokens { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Varuti> Varuti { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            /*if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=BTODERICA;Initial Catalog=Var_2;Integrated Security=True");
-            }*/
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(e => e.UserId);
-            modelBuilder.Entity<IdentityUserRole<string>>().HasKey(e => e.UserId);
-            modelBuilder.Entity<IdentityUserToken<string>>().HasKey(e => e.UserId);
-
             modelBuilder.Entity<Blogs>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedOnAdd();
+                entity.HasIndex(e => e.UserId);
+
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Title)
                     .IsRequired()
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.UserId)
                     .IsRequired()
-                    .HasColumnName("UserID")
-                    .HasMaxLength(128);
+                    .HasColumnName("UserID");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Blogs)
@@ -69,6 +63,8 @@ namespace BcuV0._3.Models.Scaffold1
             modelBuilder.Entity<BlogsSections>(entity =>
             {
                 entity.HasKey(e => new { e.BlogId, e.SectionId });
+
+                entity.HasIndex(e => e.SectionId);
 
                 entity.Property(e => e.BlogId).HasColumnName("BlogID");
 
@@ -91,9 +87,9 @@ namespace BcuV0._3.Models.Scaffold1
             {
                 entity.HasKey(e => e.CommentId);
 
-                entity.Property(e => e.CommentId)
-                    .HasColumnName("CommentID")
-                    .ValueGeneratedOnAdd();
+                entity.HasIndex(e => e.PostId);
+
+                entity.Property(e => e.CommentId).HasColumnName("CommentID");
 
                 entity.Property(e => e.Content).IsRequired();
 
@@ -102,7 +98,7 @@ namespace BcuV0._3.Models.Scaffold1
                 entity.Property(e => e.UserId)
                     .IsRequired()
                     .HasColumnName("UserID")
-                    .HasMaxLength(128);
+                    .HasMaxLength(450);
 
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.Comments)
@@ -113,9 +109,7 @@ namespace BcuV0._3.Models.Scaffold1
 
             modelBuilder.Entity<Posts>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Title)
                     .IsRequired()
@@ -137,9 +131,7 @@ namespace BcuV0._3.Models.Scaffold1
 
             modelBuilder.Entity<Sections>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -150,6 +142,8 @@ namespace BcuV0._3.Models.Scaffold1
             modelBuilder.Entity<SectionsPosts>(entity =>
             {
                 entity.HasKey(e => new { e.SectionId, e.PostId });
+
+                entity.HasIndex(e => e.PostId);
 
                 entity.Property(e => e.SectionId).HasColumnName("SectionID");
 
@@ -172,9 +166,11 @@ namespace BcuV0._3.Models.Scaffold1
             {
                 entity.HasKey(e => new { e.UserId, e.CommentId, e.ReactId });
 
-                entity.Property(e => e.UserId)
-                    .HasColumnName("UserID")
-                    .HasMaxLength(128);
+                entity.HasIndex(e => e.CommentId);
+
+                entity.HasIndex(e => e.ReactId);
+
+                entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.Property(e => e.CommentId).HasColumnName("CommentID");
 
@@ -199,14 +195,21 @@ namespace BcuV0._3.Models.Scaffold1
                     .HasConstraintName("FK_UserCommentReacts_Varuti");
             });
 
+            modelBuilder.Entity<UserLogins>(entity =>
+            {
+                entity.HasKey(e => e.UserId);
+            });
+
             modelBuilder.Entity<UserPostReacts>(entity =>
             {
                 entity.HasKey(e => new { e.UserId, e.PostId, e.ReactId })
                     .HasName("PK_UserPostReacts_1");
 
-                entity.Property(e => e.UserId)
-                    .HasColumnName("UserID")
-                    .HasMaxLength(128);
+                entity.HasIndex(e => e.PostId);
+
+                entity.HasIndex(e => e.ReactId);
+
+                entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.Property(e => e.PostId).HasColumnName("PostID");
 
@@ -231,21 +234,34 @@ namespace BcuV0._3.Models.Scaffold1
                     .HasConstraintName("FK_UserPostReacts_Varuti");
             });
 
+            modelBuilder.Entity<UserRoles>(entity =>
+            {
+                entity.HasKey(e => e.UserId);
+            });
+
+            modelBuilder.Entity<UserTokens>(entity =>
+            {
+                entity.HasKey(e => e.UserId);
+            });
+
             modelBuilder.Entity<Varuti>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .HasMaxLength(128);
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.BlogId).HasColumnName("BlogID");
 
                 entity.Property(e => e.Nume)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .IsFixedLength();
 
                 entity.Property(e => e.Prenume)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .IsFixedLength();
+
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.Varuti)
+                    .HasForeignKey<Varuti>(d => d.Id)
+                    .HasConstraintName("FK_Varuti_Users");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BcuV0._3.Models.BaseUoW;
-using BcuV0._3.Models.Scaffold1;
+using BcuV0._3.Models.Scaffold2;
 using BcuV0._3.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,20 +20,24 @@ namespace BcuV0._3.Controllers
 
         public IActionResult Index()
         {
+            return BlogOf(User.Identity.Name);
+        }
+
+        public IActionResult BlogOf(string Name)
+        {
             // daca intru aici, in primul rand am un user logat
             // aflu datele, extrag blog-ul corespunzator/il creez daca nu exista
 
-            var userName = User.Identity.Name;
+            var userName = Name;
             if (userName is null)
             {
-                return View("BlogUnavailable", "Username issue");
+                return View("BlogUnavailable", $"Username este null");
             }
 
             var user = _unit.Varuti.GetByName(userName);
             if(user is null)
             {   
-
-                return View("BlogUnavailable", "Username issue");
+                return View("BlogUnavailable", $"Nu am gasit {user.BlogId}");
             }
 
             var blogId = user.BlogId;
@@ -51,9 +55,8 @@ namespace BcuV0._3.Controllers
 
                 user.BlogId = _unit.Blogs.GetLastInsertedId();
                 blogId = user.BlogId;
-                newBlog.Id = blogId;
+                newBlog.Id = blogId ?? 0;
                 selectedBlog = newBlog;
-
 
                 _unit.Varuti.Update(user);
                 _unit.Complete();
@@ -61,7 +64,7 @@ namespace BcuV0._3.Controllers
             else
             {
                 // daca exista dinainte, doar il scot din bd
-                selectedBlog = _unit.Blogs.GetById(blogId);
+                selectedBlog = _unit.Blogs.GetById(blogId ?? 0);
             }
             
             if(selectedBlog is null)
@@ -86,20 +89,20 @@ namespace BcuV0._3.Controllers
                 return View("BlogUnavailable", "Error on loading sections");
             }
 
-            FillPosts(sectionList);
-            return View("ShowBlogPage", new BlogUserSections(selectedBlog, user, sectionList));
+            return FillPosts(new BlogUserSections(selectedBlog, user, sectionList));
         }
 
-        private IActionResult FillPosts(IEnumerable<Sections> sectionList)
+        private IActionResult FillPosts(BlogUserSections combinedModel)
         {
-            // adaug postarile
+            var postToSectsMap = new Dictionary<int, IEnumerable<Posts>>();
 
-            /*foreach(var section in sectionList)
+            foreach(var sect in combinedModel.Sections)
             {
-                return View();
-            }*/
+                var posts = _unit.Posts.AllPostsForSectionId(sect.Id);
+                postToSectsMap.Add(sect.Id, posts);
+            }
 
-            return View("BlogUnavailable", "postari");
+            return View("ShowBlogPage", new BUSPosts(combinedModel, postToSectsMap));
         }
     }
 }

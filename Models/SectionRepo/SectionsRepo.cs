@@ -1,5 +1,5 @@
 ﻿using BcuV0._3.Models.BaseRepo;
-using BcuV0._3.Models.Scaffold1;
+using BcuV0._3.Models.Scaffold2;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,12 @@ namespace BcuV0._3.Models.SectionRepo
         public SectionsRepo(Var_2Context context) : base(context)
         {
             this._context = context;
+        }
+
+        public int GetLastInsertedId()
+        {
+            return
+                _context.Sections.OrderByDescending(s => s.Id).FirstOrDefault().Id;
         }
 
         public IEnumerable<Sections> SectionsForBlogId(int Id)

@@ -1,6 +1,6 @@
 ﻿using BcuV0._3.Models.BlogsRepo;
 using BcuV0._3.Models.PostRepo;
-using BcuV0._3.Models.Scaffold1;
+using BcuV0._3.Models.Scaffold2;
 using BcuV0._3.Models.SectionRepo;
 using BcuV0._3.Models.Varutrepo;
 using System;
